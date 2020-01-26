@@ -86,6 +86,6 @@ class RegisterController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect()->intended('login/admin');
+        return redirect()->intended('admin');
     }
 }

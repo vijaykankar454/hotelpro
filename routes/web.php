@@ -11,23 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+Route::get('/admin/register', 'Admin\Auth\RegisterController@showAdminRegisterForm');
+Route::post('/admin/register', 'Admin\Auth\RegisterController@createAdmin');
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
-Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
-  
-Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
-  
+    Route::get('/', 'Auth\LoginController@showAdminLoginForm')->name('loginview');
+    Route::post('/login', 'Auth\LoginController@adminLogin')->name('login');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::post('/login/admin', 'Auth\LoginController@adminLogin');
-  
-Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
-   
+    Route::group([ 'middleware' =>  ['auth:admin']], function()
+    {
+        Route::get('/dashboard', 'AdminDashboard@index')->name('dashboard');
 
-
-Route::view('/admin', 'admin');
+    });
+});
