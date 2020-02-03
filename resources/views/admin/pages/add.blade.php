@@ -36,48 +36,48 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form method="POST" action="http://hotel.dev/admin/login" accept-charset="UTF-8" aria-label="Login">
+          {!! Form::open(['method'=>'GET', 'url'=> route('admin.pageadd'), 'name'=>'add_page', 'id'=>'add_page','novalidate'=>'novalidate']) !!}
             <div class="card-body col-md-8" >
               <div class="form-group">
-                <label for="v_name">Page/Menu Name</label>
-                <input type="text" name="v_name" required="required" class="form-control" id="v_name" placeholder="Page Name">
+                {!! Form::label('v_name', 'Page/Menu Name') !!}
+                {!! Form::text('v_name', null, ['class'=>'form-control','id'=>'v_name','placeholder'=>'Page Name'])!!}
               </div>
               <div class="form-group">
-                <label for="v_title">Page Title</label>
-                <input type="text" name="v_title" required class="form-control" id="v_title" placeholder="Page Title">
+                {!! Form::label('v_title', 'Page Title') !!}
+                {!! Form::text('v_title', null, ['class'=>'form-control','id'=>'v_title','placeholder'=>'Page Title'])!!}
               </div>
             
               <div class="form-group">
-                <label for="v_desc">Description</label>
-                <textarea  class="form-control" name="v_desc" id="v_desc"  ></textarea>
+                {!! Form::label('v_desc', 'Description') !!}
+                {!! Form::textarea('v_desc', null, ['class'=>'form-control','id'=>'v_desc'])!!}
               </div>
               <div class="form-group">
-                <label for="v_metatitle">Meta TItle</label>
-                <textarea  class="form-control" placeholder="Meta TItle" name="v_metatitle" id="v_metatitle" required></textarea>
-              </div>
+                {!! Form::label('v_metatitle', 'Meta TItle') !!}
+                {!! Form::textarea('v_metatitle', null, ['class'=>'form-control','id'=>'v_metatitle','placeholder'=>'Meta TItle'])!!}
+             </div>
               
               <div class="form-group">
-                <label for="v_metadescription">Meta Description</label>
-                <textarea  class="form-control" placeholder="Meta Description" name="v_metadescription" id="v_metadescription" required></textarea>
-              </div>
+                {!! Form::label('v_metadescription', 'Meta Description') !!}
+                {!! Form::textarea('v_metadescription', null, ['class'=>'form-control','id'=>'v_metadescription','placeholder'=>'Meta Description'])!!}
+             </div>
   
               <div class="form-group">
-                <label for="v_metakeyword">Meta Keyword</label>
-                <textarea  class="form-control" placeholder="Meta Keyword" name="v_metakeyword" id="v_metakeyword" required></textarea>
+                {!! Form::label('v_metakeyword', 'Meta Keyword') !!}
+                {!! Form::textarea('v_metakeyword', null, ['class'=>'form-control','id'=>'v_metakeyword','placeholder'=>'Meta Keyword'])!!}
               </div>
 
               <div class="form-group">
-                <label for="i_order">Order</label>
-                <input  type="text" class="form-control" name="i_order" id="i_order" value="0" maxlength="3" style='width:70px;' placeholder="Order">
+                {!! Form::label('i_order', 'Order') !!}
+                {!! Form::text('i_order', 0, ['class'=>'form-control','id'=>'i_order','placeholder'=>'Order','maxlength'=>3,'style'=>'width:70px;'])!!}
               </div>
              
             </div>
             <!-- /.card-body -->
 
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-          </form>
+              {!! Form::submit('Submit', ['class'=>'btn btn-primary']) !!}
+             </div>
+             {!! Form::close() !!}
         </div>
       </div>
       <!-- /.card -->
@@ -139,7 +139,7 @@
 		$(".sub_chk:checked").each(function() {  
 			allVals.push($(this).attr('data-id'));
 		});  
-		//alert(allVals.length); return false;  
+		
 		if(allVals.length <=0)  
 		{  
       swal({
@@ -168,21 +168,16 @@
     
   }
 
-  $(function () {
-    $('#example1').DataTable({
-    'order': [],
-    'columnDefs': [ {
-    'targets': [0,1,4], /* column index */
-    'orderable': false, /* true or false */
-    }]
-    });
-  });
 </script>
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
-  CKEDITOR.replace( 'v_desc',{
+CKEDITOR.replace( 'v_desc',{
     filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
     filebrowserUploadMethod: 'form'
 } );
 </script>
+<script src="{{ asset('js/backend_js/jquery-validation/additional-methods.min.js') }}"></script>
+<script src="{{ asset('js/backend_js/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/backend_js/jquery-validation/jquery.form-validate.js') }}"></script>
+
 @endpush
