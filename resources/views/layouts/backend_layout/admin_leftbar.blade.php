@@ -2,7 +2,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 {{ __('Dashboard') }}
@@ -19,7 +19,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.pagelist') }}" class="nav-link" {{ Request::is('admin/dashboard') ? 'active' : '' }}>
               <i class="nav-icon fas fa-copy"></i>
               <p>
                

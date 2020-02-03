@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config('app.locale') }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,8 +10,10 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('css/backend_css/all.min.css') }}">
   <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ asset('css/backend_css/ionicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/backend_css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('css/backend_css/datatables-bs4/css/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ asset('css/backend_css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/backend_css/fontawesome.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
@@ -82,7 +84,10 @@
 <!-- overlayScrollbars -->
 <script src="{{ asset('js/backend_js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
+<script src="{{ asset('js/backend_js/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('css/backend_css/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('js/backend_js/adminlte.min.js') }}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+@stack('js')
 </body>
 </html>
