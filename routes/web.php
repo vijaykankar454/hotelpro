@@ -28,10 +28,16 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     
     Route::group([ 'middleware' =>  ['auth:admin']], function()
     {
-        Route::get('/dashboard', 'AdminDashboard@index')->name('dashboard');
-        Route::get('/pages','PageController@index')->name('pagelist');
-        Route::match(['get', 'post'],'/pages/addpage','PageController@addPage')->name('pageadd');  
         Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
-  
+         /* Dashoard route */
+        Route::get('/dashboard', 'AdminDashboard@index')->name('dashboard');
+        
+        /* page route */
+        Route::get('/pages','PageController@index')->name('page.pagelist');
+        Route::get('/pages/addpage','PageController@addPage')->name('page.pageadd'); 
+        Route::post('/pages/addpagesubmit','PageController@addPageSubmit')->name('page.pageaddsubmit');  
+        Route::get('/pages/delete/{id}','PageController@delete')->name('page.pagedelete')->where('id', '[0-9]+'); 
+        Route::get('/pages/updatestatus/{id}/{status}','PageController@updateStatus')->name('page.pageupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
+        Route::post('/pagemanager/deleteAll','PageController@deleteAll')->name('page.deleteall');
     });
 });

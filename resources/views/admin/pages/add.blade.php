@@ -11,7 +11,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-          <li class="breadcrumb-item active"> <a href="#">{{ __('Static pages') }} </a></li>
+          <li class="breadcrumb-item active"> <a href="{{route('admin.page.pagelist')}}">{{ __('Static pages') }} </a></li>
           <li class="breadcrumb-item active"> {{ __('Add  pages') }}</li>
         </ol>
       </div><!-- /.col -->
@@ -34,9 +34,18 @@
           <div class="card-header">
             <h3 class="card-title">Add Page</h3>
           </div>
+          @if (count($errors) > 0)
+            <div class = "alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+          </div>
+          @endif
           <!-- /.card-header -->
           <!-- form start -->
-          {!! Form::open(['method'=>'GET', 'url'=> route('admin.pageadd'), 'name'=>'add_page', 'id'=>'add_page','novalidate'=>'novalidate']) !!}
+          {!! Form::open(['method'=>'POST', 'url'=> route('admin.page.pageaddsubmit'), 'name'=>'add_page', 'id'=>'add_page','novalidate'=>'novalidate']) !!}
             <div class="card-body col-md-8" >
               <div class="form-group">
                 {!! Form::label('v_name', 'Page/Menu Name') !!}
@@ -89,86 +98,7 @@
 
 @endsection
 @push('js')
-<script>
-  $('#masterchk').on('click', function(e) {
-    if($(this).is(':checked',true))  
-    {
-      $(".sub_chk").prop('checked', true);  
-    }  
-    else  
-    {  
-      $(".sub_chk").prop('checked',false);  
-    }  
-  });
-  function deleteRecord(){
 
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this record!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        window.location.href="{{ url('/')}}/pagemanager/delete/"+id;
-      } else {
-        swal("Your data is safe!");
-      }
-    });
-    
-  }
-  function activeRecord(){
-
-    swal({
-      title: "Are you sure?",
-      buttons: true,
-   
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        window.location.href="{{ url('/')}}/pagemanager/delete/"+id;
-      } else {
-        swal("Your data is safe!");
-      }
-    });
-    
-  }
-  function deleteAllRecord(id){
-    var allVals = [];  
-		$(".sub_chk:checked").each(function() {  
-			allVals.push($(this).attr('data-id'));
-		});  
-		
-		if(allVals.length <=0)  
-		{  
-      swal({
-        text: "Please Select Atleast 1 Record",
-        buttons: false,
-        dangerMode: false,
-      })
-     
-    }else{
-      swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this record!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          window.location.href="{{ url('/')}}/pagemanager/delete/"+id;
-        } else {
-          swal("Your data is safe!");
-        }
-      });
-
-    }
-    
-  }
-
-</script>
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
 CKEDITOR.replace( 'v_desc',{
