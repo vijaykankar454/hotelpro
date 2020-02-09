@@ -155,4 +155,60 @@ $(document).ready(function(){
 			$(element).parents('.form-group').addClass('success');
 		}
 	});
+
+	// Form Validation
+	$("#add_slider").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_photo:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			
+		},
+		messages: {
+			v_photo: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			}
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+	// Form Validation
+	$("#edit_slider").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_photo:{
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			
+		},
+		messages: {
+			v_photo: {
+				accept: "Only image type jpg/png/jpeg is allowed"
+			}
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+
 });

@@ -49,13 +49,23 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::post('/traveller/deleteAll','TravellerController@deleteAll')->name('traveller.deleteall');
 
          /* Team route */
-         Route::get('/teams/{id?}','TeamController@index')->name('team.teamlist')->where('id', '[0-9]+');
-         Route::get('/teams/addteam/{id?}','TeamController@addTeam')->name('team.teamadd')->where('id', '[0-9]+'); 
+         Route::get('/teams','TeamController@index')->name('team.teamlist');
+         Route::get('/teams/addteam','TeamController@addTeam')->name('team.teamadd'); 
          Route::get('/teams/editteam/{id}','TeamController@editTeam')->name('team.teamedit')->where('id', '[0-9]+'); 
          Route::patch('/teams/update/{id}','TeamController@updateTeam')->name('team.recupdate')->where('id', '[0-9]+');
          Route::post('/teams/addteamsubmit','TeamController@addTeamSubmit')->name('team.recaddsubmit');  
          Route::get('/teams/delete/{id}','TeamController@delete')->name('team.recdelete')->where('id', '[0-9]+'); 
          Route::get('/teams/updatestatus/{id}/{status}','TeamController@updateStatus')->name('team.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
          Route::post('/teamsmanager/deleteAll','TeamController@deleteAll')->name('team.deleteall');
+
+         /* slider route */
+         Route::get('/slider','SliderController@index')->name('slider.sliderlist');
+         Route::get('/slider/addslider','SliderController@addSlider')->name('slider.slideradd'); 
+         Route::get('/slider/editslider/{id}','SliderController@editSlider')->name('slider.slideredit')->where('id', '[0-9]+'); 
+         Route::patch('/slider/update/{id}','SliderController@updateSlider')->name('slider.recupdate')->where('id', '[0-9]+');
+         Route::post('/slider/addslidersubmit','SliderController@addSliderSubmit')->name('slider.recaddsubmit');  
+         Route::get('/slider/delete/{id}','SliderController@delete')->name('slider.recdelete')->where('id', '[0-9]+'); 
+         Route::get('/slider/updatestatus/{id}/{status}','SliderController@updateStatus')->name('slider.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
+         Route::post('/slidermanager/deleteAll','SliderController@deleteAll')->name('slider.deleteall');
     });
 });

@@ -6,20 +6,20 @@ use App\Http\Requests\AddTeamRequest;
 use App\Http\Requests\EditTeamRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-Use App\Page;
+
 Use App\Team;
 use Image;
 
 class TeamController extends Controller
 {
-    public function index($id =0)
+    public function index()
     {
       
         $teamData  = Team::orderBy('id','DESC')->get();
         return view('admin.teams.index', compact('teamData'));
        
     }
-    public function addTeam($id = 0)
+    public function addTeam()
     {
         return view('admin.teams.add', compact('id'));
     }

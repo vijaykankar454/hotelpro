@@ -110,7 +110,7 @@
         
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.slider.sliderlist') }}" class="nav-link {{ Request::is('admin/slider') ? 'active' : '' }}">
               <i class="nav-icon fas fa-picture-o"></i>
               <p>
                 {{ __('Slider') }}
