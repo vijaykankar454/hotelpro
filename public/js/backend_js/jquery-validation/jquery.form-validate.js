@@ -19,22 +19,132 @@ $(document).ready(function(){
         }
 				
 			},
-			v_metatitle:{
-				required:true,
-				
-			},
-			v_metadescription:{
-				required:true,
-				
-			},
-			v_metakeyword:{
-				required:true,
-			
-			},
-			i_order:{
-			number:true,
-			}
+	
+		
 		},
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+
+		// Form Validation
+	$("#add_team").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_name:{
+				required:true
+			},
+			v_email: {
+				email: true
+
+			},
+			v_website: {
+				url: true
+			},
+			v_designation:{
+				required:true,
+				
+			},
+			v_photo:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			v_banner:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			v_description:{
+				required:function(textarea) {
+				CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+				var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+				return editorcontent.length === 0;
+				}
+				
+			},
+	
+		
+		},
+		messages: {
+
+			v_photo: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+			v_banner: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+
+	$("#edit_team").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_name:{
+				required:true
+			},
+			v_email: {
+				email: true
+
+			},
+			v_website: {
+				url: true
+			},
+			v_designation:{
+				required:true,
+				
+			},
+			v_photo:{
+			
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			v_banner:{
+				
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			v_description:{
+				required:function(textarea) {
+				CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+				var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+				return editorcontent.length === 0;
+				}
+				
+			},
+	
+		
+		},
+		messages: {
+
+			v_photo: {
+			
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+			v_banner: {
+			
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
 		errorClass: "errorlte",
 		errorElement: "span",
 		highlight:function(element, errorClass, validClass) {

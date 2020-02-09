@@ -19,11 +19,21 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('admin.page.pagelist') }}" class="nav-link" {{ Request::is('admin/dashboard') ? 'active' : '' }}>
+            <a href="{{ route('admin.page.pagelist') }}" class="nav-link {{ Request::is('admin/pages') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                
                {{ __('Static pages') }}  
+              </p>
+            </a>
+         
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{ route('admin.traveller.travellerlist') }}" class="nav-link {{ Request::is('admin/traveller') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-plane"></i>
+              <p>
+               
+               {{ __('Traveller') }}  
               </p>
             </a>
          
@@ -91,7 +101,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.team.teamlist') }}" class="nav-link {{ Request::is('admin/teams') ? 'active' : '' }}" >
               <i class="nav-icon fas fa-users"></i>
               <p>
                 {{ __('Team Member') }}

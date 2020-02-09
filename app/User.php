@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','status'
     ];
 
     /**
@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getTravllerStatusAttribute()
+    {   if($this->status == 0){
+            return "<span class='badge badge-warning'>Inactive</span>";
+        }else{
+            return "<span class='badge badge-success'>Active</span>";
+        }
+    }
 }

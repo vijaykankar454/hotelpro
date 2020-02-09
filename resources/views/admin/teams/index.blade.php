@@ -6,12 +6,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{ __('Static Pages') }}</h1>
+        <h1 class="m-0 text-dark">{{ __('View Team Members') }}</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-          <li class="breadcrumb-item active"> {{ __('Static pages') }}</li>
+          <li class="breadcrumb-item active"> {{ __('View Team Members') }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -31,56 +31,52 @@
     @endif
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">@if(!empty($pagename)) {{$pagename}} - Sub Pages @else Main Pages @endif</h3>
-          @if(!empty($id))
-            <a href='{{route('admin.page.pageadd',$id)}}' class="btn btn-sm btn-primary pull-left delete_all" style='float:right;' >Add Sub Pages</a>
-            <a href='{{route('admin.page.pagelist')}}' class="btn btn-sm btn-primary pull-left delete_all" style='float:right;margin-right:5px;' >Back</a>
-         
-          @else
-            <a href='{{route('admin.page.pageadd')}}' class="btn btn-sm btn-primary pull-left delete_all" style='float:right;' >Add Pages</a>
-          @endif
+          <h3 class="card-title">View Team Members</h3>
+            <a href='{{route('admin.team.teamadd')}}' class="btn btn-sm btn-primary pull-left delete_all" style='float:right;' >Add Team Member</a>
         </div>
         <!-- /.card-header --> 
-        {!! Form::open(['method'=>'POST', 'url'=> route('admin.page.deleteall'), 'id'=>'myForm']) !!}
-        {!! Form::hidden('parent_id', $id)!!}
+        {!! Form::open(['method'=>'POST', 'url'=> route('admin.team.deleteall'), 'id'=>'myForm']) !!}
+          
         <div class="card-body"><a class="btn btn-primary btn-sm pull-left delete_all" style='float:right;color:white;' onclick="return deleteAllRecord();">Delete Selected </a>
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
               <th><input type="checkbox" name="" id="masterchk" value=""></th>
-              <th>Page /Menu Name</th>
-              <th>Page Title</th>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Designation</th>
               <th>Order</th>
-              <th>Status</th>
+            
               <th>Created At</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-              @if(!empty(count($Pages)))
-                @foreach($Pages as $page)
+              @if(!empty(count($teamData)))
+                @foreach($teamData as $team)
                   <tr>
-                    <td><input type="checkbox" name="pageid[]" class="sub_chk" value="{{$page->id}}"></td>
+                    <td><input type="checkbox" name="teamid[]" class="sub_chk" value="{{$team->id}}"></td>
                     <td>
-                      {{$page->v_name}}  
-                      @if(empty($id)) 
-                        <a class="badge badge-success" href="{{route('admin.page.pagelist',$page->id)}}"style='color:white;'>Sub Page</a> 
-                       @endif
+                      @if($team->photo)
+                      <img height="150" src="{{$team->photo}}" alt="">
+                      @else
+                      no image
+                      @endif
                     </td>
-                    <td> {{$page->v_title}}</td>
+                    <td> {{$team->v_name}} </td>
                    
-                    <td> {{$page->i_order}}</td>
-                    <td>{!!$page->page_status!!}</td>
-                      <td>{{$page->created_at}}</td>
+                    <td>{{$team->v_designation}} </td>
+                    <td>{{$team->i_order}}</td>
+                      <td>{{$team->created_at}}</td>
                     
                     <td>
                     
-                      <a href="{{route('admin.page.pageedit',$page->id)}}" class="btn btn-info btn-sm">Edit</a>  
-                      <a href="#;" class="btn btn-danger btn-sm" onclick="deleteRecord('{{route('admin.page.pagedelete',$page->id)}}')">Delete</a>
-                      @if($page->i_status==1)
-                        <a href="#;" onclick="activeRecord('{{route('admin.page.pageupdatestatus',[$page->id,0])}}')" class="btn btn-success btn-sm">Inactive</a></td>
+                      <a href="{{route('admin.team.teamedit',$team->id)}}" class="btn btn-info btn-sm">Edit</a>  
+                      <a href="#;" class="btn btn-danger btn-sm" onclick="deleteRecord('{{route('admin.team.recdelete',$team->id)}}')">Delete</a>
+                      @if($team->i_status==1)
+                        <a href="#;" onclick="activeRecord('{{route('admin.team.recupdatestatus',[$team->id,0])}}')" class="btn btn-success btn-sm">Inactive</a></td>
                       @else 
-                      <a href="#;" onclick="activeRecord('{{route('admin.page.pageupdatestatus',[$page->id,1])}}')" class="btn btn-warning btn-sm">Active</a></td>  
+                      <a href="#;" onclick="activeRecord('{{route('admin.team.recupdatestatus',[$team->id,1])}}')" class="btn btn-warning btn-sm">Active</a></td>  
                       @endif
                   </tr>
                 @endforeach
@@ -93,10 +89,11 @@
             <tfoot>
               <tr>
                 <th></th>
-                <th>Page /Menu Title</th>
-                <th>Page Title</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Designation</th>
                 <th>Order</th>
-                <th>Status</th>
+
                 <th>Created At</th>
                 <th>Action</th>
               </tr>
@@ -121,7 +118,7 @@
     $('#example1').DataTable({
     'order': [],
     'columnDefs': [ {
-    'targets': [0,4,6], /* column index */
+    'targets': [0,1,6], /* column index */
     'orderable': false, /* true or false */
     }]
     });

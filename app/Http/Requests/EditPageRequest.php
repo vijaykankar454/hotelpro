@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request as Requestform;
 
-class AddPageRequest extends FormRequest
+class EditPageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +22,10 @@ class AddPageRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Requestform $request)
     {
         return [
-				'v_name'			=>	'required|unique:pages',
+				'v_name'			=>	'required|unique:pages,v_name,'.$request->id,
 				'v_title'			=>	'required',
 				'v_desc'			=>	'required',
 				'i_order'			=>	'numeric'
@@ -35,9 +36,11 @@ class AddPageRequest extends FormRequest
     {
         return [
              'v_name.required' 				=> 'Please Enter Page Name.',
-             'unique.required' 				=> 'Page Name already exist.',
              'v_title.required'		 		=> 'Please Enter Title.',
              'v_desc.required'		 		=> 'Please Enter Description.',
+             'v_metatitle.required'		 	=> 'Please Enter Meta Title.',
+             'v_metadescription.required'	=> 'Please Enter Meta Description.',
+             'v_metakeyword.required'		=> 'Please Enter Meta Keyword.',
              'i_order.numeric' 				=> 'Please enter numeric number Only',
              'v_name.unique' 				=> 'Page Name already exist.',
         ];

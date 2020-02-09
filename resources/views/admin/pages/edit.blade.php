@@ -6,13 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{ __('Add Pages') }}</h1>
+        <h1 class="m-0 text-dark">{{ __('Edit Pages') }}</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
           <li class="breadcrumb-item active"> <a href="{{route('admin.page.pagelist')}}">{{ __('Static pages') }} </a></li>
-          <li class="breadcrumb-item active"> {{ __('Add  pages') }}</li>
+          <li class="breadcrumb-item active"> {{ __('Edit  pages') }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -32,7 +32,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Add Page</h3>
+            <h3 class="card-title">Edit Page</h3>
           </div>
           @if (count($errors) > 0)
             <div class = "alert alert-danger">
@@ -45,9 +45,9 @@
           @endif
           <!-- /.card-header -->
           <!-- form start -->
-          {!! Form::open(['method'=>'POST', 'url'=> route('admin.page.pageaddsubmit'), 'name'=>'add_page', 'id'=>'add_page','novalidate'=>'novalidate']) !!}
-            <div class="card-body col-md-8" >
-              {!! Form::hidden('parent_id', $id)!!}
+          {!! Form::model($Pages,['method'=>'PATCH', 'url'=> route('admin.page.pageupdate',$Pages->id), 'name'=>'add_page', 'id'=>'add_page','novalidate'=>'novalidate']) !!}
+          {!! Form::hidden('id', null)!!}
+          <div class="card-body col-md-8" >
               <div class="form-group">
                 {!! Form::label('v_name', 'Page/Menu Name') !!} <span style='color:red';>*</span>
                 {!! Form::text('v_name', null, ['class'=>'form-control','id'=>'v_name','placeholder'=>'Page Name'])!!}
@@ -62,23 +62,23 @@
                 {!! Form::textarea('v_desc', null, ['class'=>'form-control','id'=>'v_desc'])!!}
               </div>
               <div class="form-group">
-                {!! Form::label('v_metatitle', 'Meta TItle') !!} 
+                {!! Form::label('v_metatitle', 'Meta TItle') !!}
                 {!! Form::textarea('v_metatitle', null, ['rows'=>4,'class'=>'form-control','id'=>'v_metatitle','placeholder'=>'Meta TItle'])!!}
              </div>
               
               <div class="form-group">
-                {!! Form::label('v_metadescription', 'Meta Description') !!} 
+                {!! Form::label('v_metadescription', 'Meta Description') !!}
                 {!! Form::textarea('v_metadescription', null, ['rows'=>4,'class'=>'form-control','id'=>'v_metadescription','placeholder'=>'Meta Description'])!!}
              </div>
   
               <div class="form-group">
-                {!! Form::label('v_metakeyword', 'Meta Keyword') !!} 
+                {!! Form::label('v_metakeyword', 'Meta Keyword') !!}
                 {!! Form::textarea('v_metakeyword', null, ['rows'=>4,'class'=>'form-control','id'=>'v_metakeyword','placeholder'=>'Meta Keyword'])!!}
               </div>
 
               <div class="form-group">
                 {!! Form::label('i_order', 'Order') !!}
-                {!! Form::text('i_order', 0, ['class'=>'form-control','id'=>'i_order','placeholder'=>'Order','maxlength'=>3,'style'=>'width:70px;'])!!}
+                {!! Form::text('i_order', null, ['class'=>'form-control','id'=>'i_order','placeholder'=>'Order','maxlength'=>3,'style'=>'width:70px;'])!!}
               </div>
              
             </div>
