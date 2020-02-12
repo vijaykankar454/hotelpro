@@ -19,7 +19,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('admin.page.pagelist') }}" class="nav-link {{ Request::is('admin/pages') ? 'active' : '' }}">
+            <a href="{{ route('admin.page.pagelist') }}" class="nav-link {{ Request::is('admin/pages*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                
@@ -29,7 +29,7 @@
          
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('admin.traveller.travellerlist') }}" class="nav-link {{ Request::is('admin/traveller') ? 'active' : '' }}">
+            <a href="{{ route('admin.traveller.travellerlist') }}" class="nav-link {{ Request::is('admin/traveller*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-plane"></i>
               <p>
                
@@ -39,7 +39,7 @@
          
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.destination.destinationlist') }}" class="nav-link {{ Request::is('admin/destination*') ? 'active' : '' }}">
               <i class="nav-icon fas fa fa-map-signs"></i>
               <p>
                  {{ __('Destination') }}  
@@ -101,7 +101,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('admin.team.teamlist') }}" class="nav-link {{ Request::is('admin/teams') ? 'active' : '' }}" >
+            <a href="{{ route('admin.team.teamlist') }}" class="nav-link {{ Request::is('admin/teams*') ? 'active' : '' }}" >
               <i class="nav-icon fas fa-users"></i>
               <p>
                 {{ __('Team Member') }}
@@ -110,7 +110,7 @@
         
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('admin.slider.sliderlist') }}" class="nav-link {{ Request::is('admin/slider') ? 'active' : '' }}">
+            <a href="{{ route('admin.slider.sliderlist') }}" class="nav-link {{ Request::is('admin/slider*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-picture-o"></i>
               <p>
                 {{ __('Slider') }}
@@ -120,7 +120,7 @@
           </li>
           
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.testimonial.testimoniallist') }}" class="nav-link {{ Request::is('admin/testimonial*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-user-plus"></i>
               <p>
                 {{ __('Testimonial') }}
@@ -130,7 +130,7 @@
           </li>
 
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.client.clientlist') }}" class="nav-link {{ Request::is('admin/client*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-clone"></i>
               <p>
                  {{ __('Client') }}
@@ -139,7 +139,7 @@
         
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.service.servicelist') }}" class="nav-link {{ Request::is('admin/service*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-bars"></i>
               <p>
                 {{ __('Service') }}
@@ -157,7 +157,7 @@
         
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.faq.faqlist') }}" class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-bolt"></i>
               <p>
                  {{ __('FAQ') }}

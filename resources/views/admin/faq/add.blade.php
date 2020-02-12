@@ -6,12 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{ __('Edit Slider') }}</h1>
+        <h1 class="m-0 text-dark">{{ __('Add FAQs') }}</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-          <li class="breadcrumb-item active"> {{ __('Edit Slider') }}</li>
+        
+          <li class="breadcrumb-item active"> {{ __('Add FAQs') }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -31,7 +32,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Edit Slider</h3>
+            <h3 class="card-title">Add FAQs</h3>
           </div>
           @if (count($errors) > 0)
             <div class = "alert alert-danger">
@@ -44,42 +45,17 @@
           @endif
           <!-- /.card-header -->
           <!-- form start -->
-          {!! Form::model($Slider,['method'=>'PATCH', 'url'=> route('admin.slider.recupdate',$Slider->id), 'files' => true,'name'=>'edit_slider', 'id'=>'edit_slider','novalidate'=>'novalidate']) !!}
-          {!! Form::hidden('id', null)!!}
-          <div class="card-body col-md-8" >
-              <div class="form-group">
-                {!! Form::label('v_photo', 'Photo') !!} <span style='color:red';>*</span>
-                <div class="input-group">
-                  <div class="custom-file">
-                  
-                    {!! Form::file('v_photo',['class'=>'form-control','placeholder'=>'Photo','accept'=>'image/*']) !!}
-
-                  </div>
-                </div>(Only jpg, jpeg, gif and png are allowed)
-              </div>
-              @if($Slider->photo)
-              <img height="150" src="{{$Slider->photo}}" alt="">
-              @endif
-              <br>
-              <div class="form-group">
-                {!! Form::label('v_heading', 'Heading') !!}
-                {!! Form::text('v_heading', null, ['class'=>'form-control','id'=>'v_heading','placeholder'=>'Heading'])!!}
-              </div>
-
-              <div class="form-group">
-                {!! Form::label('v_content', 'Content') !!}
-                {!! Form::textarea('v_content', null, ['rows'=>4,'class'=>'form-control','id'=>'v_content','placeholder'=>'Content'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_button_text', 'Button Text') !!}
-              {!! Form::text('v_button_text', null, ['class'=>'form-control','id'=>'v_button_text','placeholder'=>'Button Text'])!!}
-            </div> 
+          {!! Form::open(['method'=>'POST', 'url'=> route('admin.faq.recaddsubmit'),'files' => true, 'name'=>'add_faq', 'id'=>'add_faq','novalidate'=>'novalidate']) !!}
+            <div class="card-body col-md-8" >
             
-            <div class="form-group">
-              {!! Form::label('v_button_url', 'Button URL') !!}
-              {!! Form::text('v_button_url', null, ['class'=>'form-control','id'=>'v_button_url','placeholder'=>'Button URL'])!!}
-            </div> 
+              <div class="form-group">
+                {!! Form::label('v_title', 'FAQ Title') !!} <span style='color:red';>*</span>
+                {!! Form::text('v_title', null, ['class'=>'form-control','id'=>'v_title','placeholder'=>'FAQ Title'])!!}
+              </div>
+              <div class="form-group">
+                {!! Form::label('v_desc', 'FAQ Content') !!} <span style='color:red';>*</span>
+                {!! Form::textarea('v_desc', null, ['class'=>'form-control','id'=>'v_desc'])!!}
+              </div>
 
             </div>
             <!-- /.card-body -->
@@ -99,7 +75,6 @@
 
 @endsection
 @push('js')
-
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
 CKEDITOR.replace( 'v_desc',{

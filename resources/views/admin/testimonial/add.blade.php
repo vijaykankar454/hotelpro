@@ -6,12 +6,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{ __('Edit Slider') }}</h1>
+        <h1 class="m-0 text-dark">{{ __('Add Testimonial') }}</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-          <li class="breadcrumb-item active"> {{ __('Edit Slider') }}</li>
+        
+          <li class="breadcrumb-item active"> {{ __('Add Testimonial') }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -31,7 +32,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Edit Slider</h3>
+            <h3 class="card-title">Add Testimonial</h3>
           </div>
           @if (count($errors) > 0)
             <div class = "alert alert-danger">
@@ -44,42 +45,32 @@
           @endif
           <!-- /.card-header -->
           <!-- form start -->
-          {!! Form::model($Slider,['method'=>'PATCH', 'url'=> route('admin.slider.recupdate',$Slider->id), 'files' => true,'name'=>'edit_slider', 'id'=>'edit_slider','novalidate'=>'novalidate']) !!}
-          {!! Form::hidden('id', null)!!}
-          <div class="card-body col-md-8" >
+          {!! Form::open(['method'=>'POST', 'url'=> route('admin.testimonial.recaddsubmit'),'files' => true, 'name'=>'add_testimonial', 'id'=>'add_testimonial','novalidate'=>'novalidate']) !!}
+            <div class="card-body col-md-8" >
+            
+              <div class="form-group">
+                {!! Form::label('v_name', 'Name') !!} <span style='color:red';>*</span>
+                {!! Form::text('v_name', null, ['class'=>'form-control','id'=>'v_name','placeholder'=>'Name'])!!}
+              </div>
+              <div class="form-group">
+                {!! Form::label('v_designation', 'Designation') !!} <span style='color:red';>*</span>
+                {!! Form::text('v_designation', null, ['class'=>'form-control','id'=>'v_designation','placeholder'=>'Designation'])!!}
+              </div>
               <div class="form-group">
                 {!! Form::label('v_photo', 'Photo') !!} <span style='color:red';>*</span>
                 <div class="input-group">
                   <div class="custom-file">
-                  
+                   
                     {!! Form::file('v_photo',['class'=>'form-control','placeholder'=>'Photo','accept'=>'image/*']) !!}
 
                   </div>
                 </div>(Only jpg, jpeg, gif and png are allowed)
               </div>
-              @if($Slider->photo)
-              <img height="150" src="{{$Slider->photo}}" alt="">
-              @endif
-              <br>
+             
               <div class="form-group">
-                {!! Form::label('v_heading', 'Heading') !!}
-                {!! Form::text('v_heading', null, ['class'=>'form-control','id'=>'v_heading','placeholder'=>'Heading'])!!}
-              </div>
-
-              <div class="form-group">
-                {!! Form::label('v_content', 'Content') !!}
-                {!! Form::textarea('v_content', null, ['rows'=>4,'class'=>'form-control','id'=>'v_content','placeholder'=>'Content'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_button_text', 'Button Text') !!}
-              {!! Form::text('v_button_text', null, ['class'=>'form-control','id'=>'v_button_text','placeholder'=>'Button Text'])!!}
-            </div> 
-            
-            <div class="form-group">
-              {!! Form::label('v_button_url', 'Button URL') !!}
-              {!! Form::text('v_button_url', null, ['class'=>'form-control','id'=>'v_button_url','placeholder'=>'Button URL'])!!}
-            </div> 
+                {!! Form::label('v_comment', 'Comment') !!} <span style='color:red';>*</span>
+                {!! Form::textarea('v_comment', null, ['rows'=>4,'class'=>'form-control','id'=>'v_comment','placeholder'=>'Comment'])!!}
+             </div>
 
             </div>
             <!-- /.card-body -->
@@ -100,13 +91,6 @@
 @endsection
 @push('js')
 
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-<script>
-CKEDITOR.replace( 'v_desc',{
-    filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
-    filebrowserUploadMethod: 'form'
-} );
-</script>
 <script src="{{ asset('js/backend_js/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/backend_js/jquery-validation/additional-methods.min.js') }}"></script>
 <script src="{{ asset('js/backend_js/jquery-validation/jquery.form-validate.js') }}"></script>

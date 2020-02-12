@@ -99,6 +99,6 @@
 
 <script src="{{ asset('js/backend_js/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/backend_js/jquery-validation/additional-methods.min.js') }}"></script>
-<script src="{{ asset('js/backend_js/jquery-validation/jquery.form-rvalidate.js') }}"></script>
+<script src="{{ asset('js/backend_js/jquery-validation/jquery.form-validate.js') }}"></script>
 
 @endpush

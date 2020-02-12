@@ -7,7 +7,6 @@ use App\Http\Requests\EditSliderRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-Use App\Team;
 Use App\Slider;
 use Image;
 
@@ -37,7 +36,7 @@ class SliderController extends Controller
                 $originalImage= $request->file('v_photo');
                 $thumbnailImage = Image::make($originalImage);
                 $thumbnailImage->save($originalPath.$imagetime.$originalImage->getClientOriginalName());
-                $thumbnailImage->resize(260,260);
+                $thumbnailImage->resize(260,200);
                 $thumbnailImage->save($thumbnailPath.$imagetime.$originalImage->getClientOriginalName());
                 $data['v_photo'] = $imagetime.$originalImage->getClientOriginalName();
             }

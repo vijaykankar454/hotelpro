@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Service extends Model
 {
-   protected $guarded= ['id'];
+    protected $guarded= ['id'];
 
    protected $uploads = '/image/thumbnail/';
    protected $uploadsbanner = '/image/upload/';
@@ -21,6 +21,13 @@ class Team extends Model
     {  
          if($this->v_banner !=''){
             return $this->uploadsbanner . $this->v_banner;
+        }
+    }
+    public function getServiceStatusAttribute()
+    {   if($this->i_status == 0){
+            return "<span class='badge badge-warning'>Inactive</span>";
+        }else{
+            return "<span class='badge badge-success'>Active</span>";
         }
     }
     

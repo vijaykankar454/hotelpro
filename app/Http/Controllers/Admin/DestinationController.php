@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\AddTeamRequest;
-use App\Http\Requests\EditTeamRequest;
+use App\Http\Requests\AddDestinationRequest;
+use App\Http\Requests\EditDestinationRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-Use App\Team;
+Use App\Destination;
 use Image;
 
-class TeamController extends Controller
+class DestinationController extends Controller
 {
     public function index()
     {
       
-        $teamData  = Team::orderBy('id','DESC')->get();
-        return view('admin.teams.index', compact('teamData'));
+        $destinationData  = Destination::orderBy('id','DESC')->get();
+        return view('admin.destination.index', compact('destinationData'));
        
     }
-    public function addTeam()
+    public function addDestination()
     {
-        return view('admin.teams.add');
+        return view('admin.destination.add');
     }
-    public function addTeamSubmit(AddTeamRequest $request)
+    public function addDestinationSubmit(AddDestinationRequest $request)
     {
         
         if($request->isMethod('Post')){
@@ -34,47 +34,45 @@ class TeamController extends Controller
             $thumbnailPath  = public_path().'/image/thumbnail/';
             $originalPath   = public_path().'/image/upload/';
             if($request->hasFile('v_photo')){
-               
                 $originalImage= $request->file('v_photo');
                 $thumbnailImage = Image::make($originalImage);
                 $thumbnailImage->save($originalPath.$imagetime.$originalImage->getClientOriginalName());
-                $thumbnailImage->resize(260,260);
+                $thumbnailImage->resize(260,230);
                 $thumbnailImage->save($thumbnailPath.$imagetime.$originalImage->getClientOriginalName());
                 $data['v_photo'] = $imagetime.$originalImage->getClientOriginalName();
             }
             if($request->hasFile('v_banner')){
-               
                 $originalImagebanner = $request->file('v_banner');
                 $thumbnailImagebanner = Image::make($originalImagebanner);
                 $thumbnailImagebanner->save($originalPath.$imagetime.$originalImagebanner->getClientOriginalName());
                 $data['v_banner'] = $imagetime.$originalImagebanner->getClientOriginalName();
             }
            
-            Team::create($data);
-            return redirect("admin/teams/")->with('succmessage', 'You have Added Record Successfully.');   
+            Destination::create($data);
+            return redirect("admin/destination/")->with('succmessage', 'You have Added Record Successfully.');   
         }
-        return view('admin.teams.add');
+        return view('admin.destination.add');
     }
-    public function editTeam($id)
+    public function editDestination($id)
     {
-        $Teams = Team::findOrFail($id);
-        return view('admin.teams.edit',compact('Teams'));
+        $Destination = Destination::findOrFail($id);
+        return view('admin.destination.edit',compact('Destination'));
     }
 
-    public function updateTeam(EditTeamRequest $request,$id)
+    public function updateDestination(EditDestinationRequest $request,$id)
     {
-        $TeamsData   = Team::findOrFail($id);
+        $DestinationData   = Destination::findOrFail($id);
         $data = $request->all();
-        $imagetime      = time();
-        $thumbnailPath  = public_path().'/image/thumbnail/';
-        $originalPath   = public_path().'/image/upload/';
-        $data['v_photo'] = $TeamsData->v_photo;
-        $data['v_banner'] = $TeamsData->v_banner;
+        $imagetime          = time();
+        $thumbnailPath      = public_path().'/image/thumbnail/';
+        $originalPath       = public_path().'/image/upload/';
+        $data['v_photo']    = $DestinationData->v_photo;
+        $data['v_banner']   = $DestinationData->v_banner;
 
        if($request->hasFile('v_photo')){
-            if(\File::exists(public_path('image/thumbnail/'.$TeamsData->v_photo))){
-                \File::delete(public_path('image/thumbnail/'.$TeamsData->v_photo));
-                \File::delete(public_path('image/upload/'.$TeamsData->v_photo));
+            if(\File::exists(public_path('image/thumbnail/'.$DestinationData->v_photo))){
+                \File::delete(public_path('image/thumbnail/'.$DestinationData->v_photo));
+                \File::delete(public_path('image/upload/'.$DestinationData->v_photo));
             }
             $originalImage= $request->file('v_photo');
             $thumbnailImage = Image::make($originalImage);
@@ -85,8 +83,8 @@ class TeamController extends Controller
         }
 
         if($request->hasFile('v_banner')){
-            if(\File::exists(public_path('image/upload/'.$TeamsData->v_banner))){
-                \File::delete(public_path('image/upload/'.$TeamsData->v_banner));
+            if(\File::exists(public_path('image/upload/'.$DestinationData->v_banner))){
+                \File::delete(public_path('image/upload/'.$DestinationData->v_banner));
             }
             $originalImagebanner = $request->file('v_banner');
             $thumbnailImagebanner = Image::make($originalImagebanner);
@@ -94,24 +92,24 @@ class TeamController extends Controller
             $data['v_banner'] = $imagetime.$originalImagebanner->getClientOriginalName();
         } 
 
-       $Teams      = $TeamsData->update($data);
-       return redirect("admin/teams/")->with('succmessage', 'Record Updated Successfully.');   
+       $Destination      = $DestinationData->update($data);
+       return redirect("admin/destination/")->with('succmessage', 'Record Updated Successfully.');   
     }    
     public function delete($id){
-        $PagesData= Team::findOrFail($id);
+        $PagesData= Destination::findOrFail($id);
         $PagesData->delete();
-        return redirect("admin/teams")->with('succmessage', 'Record Deleted Successfully.');   
+        return redirect("admin/destination")->with('succmessage', 'Record Deleted Successfully.');   
     }
     public function updateStatus($id,$status){
         $input['i_status'] = $status;
-        Team::findOrFail($id)->update($input);
-        return redirect("admin/teams")->with('succmessage', 'Record Status Update Successfully.');   
+        Destination::findOrFail($id)->update($input);
+        return redirect("admin/destination")->with('succmessage', 'Record Status Update Successfully.');   
     }
     public function deleteAll(Request $request){
 		if($request->isMethod('Post')){
 			$data = $request->all();
-            Team::whereIn('id', $data['teamid'])->delete();
-            return redirect("admin/teams")->with('succmessage', 'Selected Records Delete Successfully.');   
+            Destination::whereIn('id', $data['destinationid'])->delete();
+            return redirect("admin/destination")->with('succmessage', 'Selected Records Delete Successfully.');   
 		}
     }
 }

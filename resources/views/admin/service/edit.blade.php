@@ -6,12 +6,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">{{ __('Edit Team Member') }}</h1>
+        <h1 class="m-0 text-dark">{{ __('Edit Service') }}</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-          <li class="breadcrumb-item active"> {{ __('Edit Team Member') }}</li>
+          <li class="breadcrumb-item active"> {{ __('Edit Service') }}</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -31,7 +31,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Edit Team Member</h3>
+            <h3 class="card-title">Edit Service</h3>
           </div>
           @if (count($errors) > 0)
             <div class = "alert alert-danger">
@@ -44,7 +44,7 @@
           @endif
           <!-- /.card-header -->
           <!-- form start -->
-          {!! Form::model($Teams,['method'=>'PATCH', 'url'=> route('admin.team.recupdate',$Teams->id), 'files' => true,'name'=>'edit_team', 'id'=>'edit_team','novalidate'=>'novalidate']) !!}
+          {!! Form::model($Service,['method'=>'PATCH', 'url'=> route('admin.service.recupdate',$Service->id), 'files' => true,'name'=>'edit_service', 'id'=>'edit_service','novalidate'=>'novalidate']) !!}
           {!! Form::hidden('id', null)!!}
           <div class="card-body col-md-8" >
             <div class="form-group">
@@ -53,26 +53,23 @@
             </div>
 
             <div class="form-group">
-              {!! Form::label('v_phone', 'Phone') !!} 
-              {!! Form::text('v_phone', null, ['class'=>'form-control','id'=>'v_phone','placeholder'=>'Phone'])!!}
-            </div>
-
+              {!! Form::label('v_short_description', 'Short Description') !!} <span style='color:red';>*</span>
+              {!! Form::textarea('v_short_description', null, ['rows'=>5,'class'=>'form-control','id'=>'v_short_description','placeholder'=>'Short Description'])!!}
+           </div>  
+           <div class="form-group">
+            {!! Form::label('v_desc', 'Description') !!} <span style='color:red';>*</span>
+            {!! Form::textarea('v_desc', null, ['class'=>'form-control','id'=>'v_desc'])!!}
+          </div>
+          <div class="form-group">
+            {!! Form::label('v_icon', 'Icon') !!} <span style='color:red';>*</span>
+            {!! Form::text('v_icon', null, ['class'=>'form-control','id'=>'v_icon','placeholder'=>'Icon'])!!}
+          </div>
+          @if($Service->v_icon)
+            <i class="{{$Service->v_icon}}" style="font-size:50px;"></i>
+          @endif
+          <br><br>
             <div class="form-group">
-              {!! Form::label('v_email', 'Email') !!}
-              {!! Form::text('v_email', null, ['class'=>'form-control','id'=>'v_email','placeholder'=>'Email'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_website', 'Website') !!}
-              {!! Form::text('v_website', null, ['class'=>'form-control','id'=>'v_website','placeholder'=>'Website'])!!}
-            </div>
-            <div class="form-group">
-              {!! Form::label('v_designation', 'Designation') !!} <span style='color:red';>*</span>
-              {!! Form::text('v_designation', null, ['class'=>'form-control','id'=>'v_designation','placeholder'=>'Designation'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_photo', 'Photo') !!} 
+              {!! Form::label('v_photo', 'Photo') !!} <span style='color:red';>*</span>
               <div class="input-group">
                 <div class="custom-file">
                  
@@ -81,12 +78,13 @@
                 </div>
               </div>(Only jpg, jpeg, gif and png are allowed)
             </div>
-            @if($Teams->photo)
-            <img height="150" src="{{$Teams->photo}}" alt="">
+            @if($Service->photo)
+            <img height="150" src="{{$Service->photo}}" alt="">
             @endif
-            <br>
+            <br> <br>
+
             <div class="form-group">
-             {!! Form::label('v_banner', 'Banner') !!} 
+             {!! Form::label('v_banner', 'Banner') !!} <span style='color:red';>*</span>
               <div class="input-group">
                 <div class="custom-file">
                   {!! Form::file('v_banner',['class'=>'form-control','placeholder'=>'Banner','accept'=>'image/*']) !!}
@@ -95,47 +93,17 @@
                 <div class="formerror"></div>
               </div>(Only jpg, jpeg, gif and png are allowed)
             </div>
-            @if($Teams->banner)
-            <img height="130" src="{{$Teams->banner}}" alt="">
+            @if($Service->banner)
+            <img height="130" src="{{$Service->banner}}" alt="">
             @endif<br>
             <br>
-            
-            <div class="form-group">
-              {!! Form::label('v_description', 'Description') !!}
-              {!! Form::textarea('v_description', null, ['class'=>'form-control','id'=>'v_desc'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_facebooklink', 'Facebook') !!}
-              {!! Form::text('v_facebooklink', null, ['class'=>'form-control','id'=>'v_facebooklink','placeholder'=>'Facebook'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_twitterlink', 'Twitter') !!}
-              {!! Form::text('v_twitterlink', null, ['class'=>'form-control','id'=>'v_twitterlink','placeholder'=>'Twitter'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_googlepluslink', 'Google Plus') !!}
-              {!! Form::text('v_googlepluslink', null, ['class'=>'form-control','id'=>'v_googlepluslink','placeholder'=>'Google Plus'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_instagramlink', 'Instagram') !!}
-              {!! Form::text('v_instagramlink', null, ['class'=>'form-control','id'=>'v_instagramlink','placeholder'=>'Instagram'])!!}
-            </div>
-
-            <div class="form-group">
-              {!! Form::label('v_flickr', 'Flickr') !!}
-              {!! Form::text('v_flickr', null, ['class'=>'form-control','id'=>'v_flickr','placeholder'=>'Flickr'])!!}
-            </div>
 
           </div>
-           
-              <div class="card-header" style='background-color: #007bff;color:white;'>
-                <h3 class="card-title"><b>SEO Information</b></h3>
-              </div> 
-              <div class="card-body col-md-8" >  
+         
+          <div class="card-header" style='background-color: #007bff;color:white;'>
+            <h3 class="card-title"><b>SEO Information</b></h3>
+          </div> 
+          <div class="card-body col-md-8" >    
             <div class="form-group">
               {!! Form::label('v_metatitile', 'Meta TItle') !!}
               {!! Form::textarea('v_metatitile', null, ['rows'=>4,'class'=>'form-control','id'=>'v_metatitile','placeholder'=>'Meta TItle'])!!}
@@ -151,11 +119,7 @@
               {!! Form::textarea('v_metakeyword', null, ['rows'=>4,'class'=>'form-control','id'=>'v_metakeyword','placeholder'=>'Meta Keyword'])!!}
             </div>
 
-            <div class="form-group">
-              {!! Form::label('i_order', 'Order') !!}
-              {!! Form::text('i_order',null, ['class'=>'form-control','id'=>'i_order','placeholder'=>'Order','maxlength'=>3,'style'=>'width:70px;'])!!}
-            </div>  
-           
+
           
             </div>
             <!-- /.card-body -->
@@ -178,10 +142,11 @@
 
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
-CKEDITOR.replace( 'v_desc',{
+  CKEDITOR.replace( 'v_desc',{
     filebrowserUploadUrl: "{{route('admin.upload', ['_token' => csrf_token() ])}}",
     filebrowserUploadMethod: 'form'
 } );
+
 </script>
 <script src="{{ asset('js/backend_js/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/backend_js/jquery-validation/additional-methods.min.js') }}"></script>

@@ -88,7 +88,7 @@
 <script src="{{ asset('js/backend_js/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('css/backend_css/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('js/backend_js/adminlte.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script src="{{ asset('js/backend_js/sweetalert.min.js') }}"></script>
 @stack('js')
 </body>
 </html>
