@@ -117,5 +117,36 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
            Route::get('/faq/delete/{id}','FaqController@delete')->name('faq.recdelete')->where('id', '[0-9]+'); 
            Route::get('/faq/updatestatus/{id}/{status}','FaqController@updateStatus')->name('faq.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
            Route::post('/faqmanager/deleteAll','FaqController@deleteAll')->name('faq.deleteall');
+
+            /* category route */
+            Route::get('/category','CategoryController@index')->name('category.categorylist');
+            Route::get('/category/addcategory','CategoryController@addCategory')->name('category.categoryadd'); 
+            Route::get('/category/editcategory/{id}','CategoryController@editCategory')->name('category.categoryedit')->where('id', '[0-9]+'); 
+            Route::patch('/category/update/{id}','CategoryController@updateCategory')->name('category.recupdate')->where('id', '[0-9]+');
+            Route::post('/category/addcategorysubmit','CategoryController@addCategorySubmit')->name('category.recaddsubmit');  
+            Route::get('/category/delete/{id}','CategoryController@delete')->name('category.recdelete')->where('id', '[0-9]+'); 
+            Route::get('/category/updatestatus/{id}/{status}','CategoryController@updateStatus')->name('category.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
+            Route::post('/categorymanager/deleteAll','CategoryController@deleteAll')->name('category.deleteall');
+
+             /* News route */
+             Route::get('/news','NewsdataController@index')->name('news.newslist');
+             Route::get('/news/addnews','NewsdataController@addNews')->name('news.newsadd'); 
+             Route::get('/news/editnews/{id}','NewsdataController@editNews')->name('news.newsedit')->where('id', '[0-9]+'); 
+             Route::patch('/news/update/{id}','NewsdataController@updateNews')->name('news.recupdate')->where('id', '[0-9]+');
+             Route::post('/news/addnewssubmit','NewsdataController@addNewsSubmit')->name('news.recaddsubmit');  
+             Route::get('/news/delete/{id}','NewsdataController@delete')->name('news.recdelete')->where('id', '[0-9]+'); 
+             Route::get('/news/updatestatus/{id}/{status}','NewsdataController@updateStatus')->name('news.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
+             Route::post('/newsmanager/deleteAll','NewsdataController@deleteAll')->name('news.deleteall');
+
+              /* Pacakage route */
+              Route::get('/package','PackageController@index')->name('package.packagelist');
+              Route::get('/package/addpackage','PackageController@addPackage')->name('package.packageadd'); 
+              Route::get('/package/editpackage/{id}','PackageController@editPackage')->name('package.packageedit')->where('id', '[0-9]+'); 
+              Route::patch('/package/update/{id}','PackageController@updatePackage')->name('package.recupdate')->where('id', '[0-9]+');
+              Route::post('/package/addpackagesubmit','PackageController@addPackageSubmit')->name('package.recaddsubmit');  
+              Route::get('/package/delete/{id}','PackageController@delete')->name('package.recdelete')->where('id', '[0-9]+'); 
+              Route::get('/package/updatestatus/{id}/{status}','PackageController@updateStatus')->name('package.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
+              Route::post('/packagemanager/deleteAll','PackageController@deleteAll')->name('package.deleteall');
+
     });
 });

@@ -590,4 +590,327 @@ $(document).ready(function(){
 		}
 	});
 
+	// Form Validation
+	$("#add_category").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_cat_name:{
+				required:true
+			},
+			v_banner:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			
+	
+		
+		},
+		messages: {
+			v_banner: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+
+	$("#edit_category").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_cat_name:{
+				required:true
+			},
+			v_banner:{
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			
+	
+		
+		},
+		messages: {
+			v_banner: {
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+
+	// Form Validation
+	$("#add_news").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_title:{
+				required:true
+			},
+			v_short_content:{
+				required:true,
+				
+			},
+			v_desc:{
+				required:function(textarea) {
+				CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+				var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+				return editorcontent.length === 0;
+				}
+				
+			},
+			publish_date:{
+				required:true,
+				
+			},
+			category_id:{
+				required:true,
+				
+			},
+			v_photo:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			v_banner:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			
+	
+		
+		},
+		messages: {
+
+			v_photo: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+			v_banner: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+	// Form Validation
+	$("#edit_news").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_title:{
+				required:true
+			},
+			v_short_content:{
+				required:true,
+				
+			},
+			v_desc:{
+				required:function(textarea) {
+				CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+				var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+				return editorcontent.length === 0;
+				}
+				
+			},
+			publish_date:{
+				required:true,
+				
+			},
+			category_id:{
+				required:true,
+				
+			},
+			v_photo:{
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			v_banner:{
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			
+	
+		
+		},
+		messages: {
+
+			v_photo: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+			v_banner: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+	
+
+	// Form Validation
+	$("#add_package").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_name:{
+				required:true
+			},
+			v_desc:{
+				required:function(textarea) {
+				CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+				var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+				return editorcontent.length === 0;
+				}
+				
+			},
+			tour_start_date:{
+				required:true,
+			},
+			tour_end_date:{
+				required:true,
+			},
+			last_book_date:{
+				required:true,
+			},
+			v_price:{
+				required:true,
+				
+			},
+			
+			v_photo:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			v_banner:{
+				required: true,
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			destination_id:{
+				required:true,
+			},
+		
+		
+		},
+		messages: {
+
+			v_photo: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+			v_banner: {
+				required: "Please upload image",
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+	// Form Validation
+	$("#edit_package").validate({
+		ignore: [],
+			debug: false,
+		rules:{
+			v_name:{
+				required:true
+			},
+			v_desc:{
+				required:function(textarea) {
+				CKEDITOR.instances[textarea.id].updateElement(); // update textarea
+				var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
+				return editorcontent.length === 0;
+				}
+				
+			},
+			tour_start_date:{
+				required:true,
+			},
+			tour_end_date:{
+				required:true,
+			},
+			last_book_date:{
+				required:true,
+			},
+			v_price:{
+				required:true,
+				
+			},
+			
+			v_photo:{
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+				
+			},
+			v_banner:{
+				accept:"jpg,png,jpeg,JPG,PNG,JPEG",
+			},
+			destination_id:{
+				required:true,
+			},
+	
+		
+		},
+		messages: {
+
+			v_photo: {
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+			v_banner: {
+				accept: "Only image type jpg/png/jpeg is allowed"
+			},
+
+		},      
+		errorClass: "errorlte",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.form-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.form-group').removeClass('error');
+			$(element).parents('.form-group').addClass('success');
+		}
+	});
+
 });

@@ -10,13 +10,15 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('css/backend_css/all.min.css') }}">
   <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ asset('css/backend_css/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/backend_css/ionicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/backend_css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/backend_css/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+  @stack('css')
   <link rel="stylesheet" href="{{ asset('css/backend_css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/backend_css/fontawesome.min.css') }}">
-
+ 
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -89,6 +91,7 @@
 <script src="{{ asset('css/backend_css/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('js/backend_js/adminlte.min.js') }}"></script>
 <script src="{{ asset('js/backend_js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('css/backend_css/select2/js/select2.full.min.js') }}"></script>
 @stack('js')
 </body>
 </html>

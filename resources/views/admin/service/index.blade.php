@@ -87,7 +87,7 @@
                 @endforeach
               @else
 					      <tr >
-					      <td class="center" colspan=7 style='text-align:center;'>No Record Found</td></tr>
+					      <td class="center" colspan=8 style='text-align:center;'>No Record Found</td></tr>
 				      @endif
            
             </tbody>
@@ -123,7 +123,7 @@
     $('#example1').DataTable({
     'order': [],
     'columnDefs': [ {
-    'targets': [0,1,6], /* column index */
+    'targets': [0,1,7], /* column index */
     'orderable': false, /* true or false */
     }]
     });

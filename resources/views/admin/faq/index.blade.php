@@ -101,7 +101,7 @@
     $('#example1').DataTable({
     'order': [],
     'columnDefs': [ {
-    'targets': [0,1,6], /* column index */
+    'targets': [0,4], /* column index */
     'orderable': false, /* true or false */
     }]
     });

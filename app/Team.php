@@ -23,5 +23,6 @@ class Team extends Model
             return $this->uploadsbanner . $this->v_banner;
         }
     }
-    
+
+   
 }

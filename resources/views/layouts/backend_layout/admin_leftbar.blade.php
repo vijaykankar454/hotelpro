@@ -49,7 +49,7 @@
        
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ Request::is('admin/category*') ? 'active' : '' }} {{ Request::is('admin/news*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 {{ __('News') }}  
@@ -58,13 +58,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="{{ route('admin.category.categorylist') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{ __('Category') }} </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="{{ route('admin.news.newslist') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{ __('News') }}</p>
                 </a>
