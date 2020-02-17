@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\AddPageRequest;
-use App\Http\Requests\EditPageRequest;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 Use App\Page;

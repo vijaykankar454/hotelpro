@@ -49,6 +49,16 @@
        
           </li>
           <li class="nav-item has-treeview">
+            <a href="{{ route('admin.package.packagelist') }}" class="nav-link {{ Request::is('admin/package*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa fa-random"></i>
+              <p>
+                 {{ __('Package') }}  
+               
+              </p>
+            </a>
+       
+          </li>
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link {{ Request::is('admin/category*') ? 'active' : '' }} {{ Request::is('admin/news*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>

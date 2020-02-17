@@ -154,6 +154,11 @@
               <th style="width:90%;">Select Photo</th>
               <th></th>
               </tr>
+              @if(!empty(count($photo)))
+              @foreach($photo as $data)
+              <tr> <td><img height="80" src="{{$data->photo}}" alt=""></td><td><a href="javascript:void()"  data-id="{{$data->id}}"  class="btn-danger btn-xs">X</a></td> </tr>
+              @endforeach
+              @endif
               </thead>
               <tbody>
             </table>
@@ -170,6 +175,11 @@
                                           <th style="width:90%;">Video iFrame Code</th>
                                           <th></th>
                                       </tr>
+                                      @if(!empty(count($video)))
+                                      @foreach($video as $data)
+                                      <tr><td><iframe width="400" height="230" src="{{$data->v_photo_video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></td><td><a href="javascript:void()" data-id="{{$data->id}}"  class="btn-danger btn-xs">X</a></td> </tr>
+                                      @endforeach
+                                      @endif
                                   </thead>
                                   <tbody>
                                       
@@ -227,6 +237,41 @@
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
   $(document).ready(function () {
+    $(".btn-danger" ).click(function(e) {
+     
+      e.preventDefault();
+     
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this record!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+
+        if (willDelete) {
+          $(this).closest("tr").remove();
+          var formData = {"_token": "{{ csrf_token() }}",id:$(this).attr("data-id")}; //Array 
+          $.ajax({
+            url : "{{route('admin.package.recdeleteimage')}}",
+            type: "POST",
+            data : formData,
+            async: true,
+            success: function(result)
+            { 
+             
+            }
+          
+        });
+
+         
+        } else {
+            swal("Your data is safe!");
+        }
+    });
+    
+    }); 
     $(".select2").select2(),$("#datepicker").datepicker({autoclose:!0,format:"yyyy-mm-dd",todayBtn:"linked"}),$("#datepicker1").datepicker({autoclose:!0,format:"yyyy-mm-dd",todayBtn:"linked"}),$("#datepicker2").datepicker({autoclose:!0,format:"yyyy-mm-dd",todayBtn:"linked"}),$("#btnAddNew").on("click",function(){var e="";e+="<tr> ",e+='<td><input type="file" accept="image/*" name="photos[]"></td>',e+='<td><a href="javascript:void()" class="Delete btn btn-danger btn-xs">X</a></td>',e+=" </tr>",$("#photoSelection tbody").append(e),$(".select2").select2()}),$("#photoSelection").delegate("a.Delete","click",function(){return $(this).parent().parent().fadeOut("slow").remove(),!1}),$("#btnAddNew1").on("click",function(){var e="";e+="<tr> ",e+='<td><textarea name="videos[]" class="form-control" cols="30" rows="10" style="height:80px;"></textarea></td>',e+='<td><a href="javascript:void()" class="Delete1 btn btn-danger btn-xs">X</a></td>',e+=" </tr>",$("#videoSelection tbody").append(e),$(".select2").select2()}),$("#videoSelection").delegate("a.Delete1","click",function(){return $(this).parent().parent().fadeOut("slow").remove(),!1});
   })
 CKEDITOR.replace( 'v_desc',{

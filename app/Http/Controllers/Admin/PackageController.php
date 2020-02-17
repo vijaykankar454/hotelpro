@@ -91,8 +91,12 @@ class PackageController extends Controller
     public function editPackage($id)
     {   
         $categories = ['' => 'Select category'] + Destination::where('i_status',1)->pluck('v_name','id')->all();
+      
         $Package = Package::findOrFail($id);
-        return view('admin.package.edit',compact('Package','categories'));
+        $Packagedata = new Packagedata();
+        $photo = $Packagedata->getPhotos('photo',$Package->id);
+        $video = $Packagedata->getPhotos('video',$Package->id);
+        return view('admin.package.edit',compact('Package','categories','photo','video'));
     }
 
     public function updatePackage(EditPackageRequest $request,$id)
@@ -148,11 +152,12 @@ class PackageController extends Controller
 
         foreach($videopath as $video) {
             $uploadvideo = array();
-
-            $uploadvideo['v_photo_video']    = $video;
-            $uploadvideo['package_id']       = $PackageData->id;
-            $uploadvideo['package_type']     = 'video';
-            Packagedata::create($uploadvideo);
+            if(strpos($video,'www.youtube.com')){ 
+                $uploadvideo['v_photo_video']    = $video;
+                $uploadvideo['package_id']       = $PackageData->id;
+                $uploadvideo['package_type']     = 'video';
+                Packagedata::create($uploadvideo);
+            }
             
         }
         }
@@ -164,6 +169,13 @@ class PackageController extends Controller
         $PagesData->delete();
         return redirect("admin/package")->with('succmessage', 'Record Deleted Successfully.');   
     }
+
+    public function deleteImage(Request $request){
+        $PagesData= Packagedata::findOrFail($request->id);
+        $PagesData->delete();
+        return 'success';   
+    }
+
     public function updateStatus($id,$status){
         $input['i_status'] = $status;
         Package::findOrFail($id)->update($input);
