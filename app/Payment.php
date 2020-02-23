@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+Use App\Package;
+Use App\User;
 
 class Payment extends Model
 {
@@ -10,8 +12,14 @@ class Payment extends Model
     {
         return $this->belongsTo(Package::class);
     }
-    public function audioFiles()
+    public function travellerData()
     {
-        return $this->hasManyThrough( 'App\Destination','App\Package');
+        return $this->belongsTo(User::class,'user_id');
     }
+    public function getDestinationName()
+    {
+         return Package::leftJoin('destinations','destinations.id', '=', 'packages.destination_id')->where('packages.id',$this->package_id)->first();
+      
+    }
+    
 }

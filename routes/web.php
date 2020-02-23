@@ -137,6 +137,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::get('/news/delete/{id}','NewsdataController@delete')->name('news.recdelete')->where('id', '[0-9]+'); 
         Route::get('/news/updatestatus/{id}/{status}','NewsdataController@updateStatus')->name('news.recupdatestatus')->where('id', '[0-9]+')->where('status', '[0-9]+'); 
         Route::post('/newsmanager/deleteAll','NewsdataController@deleteAll')->name('news.deleteall');
+        Route::get('/news/comment','NewsdataController@Comment')->name('news.addcomment');
+        Route::post('/news/addcomment','NewsdataController@addCommentSubmit')->name('social.addcommentsubmit'); 
 
         /* Pacakage route */
         Route::get('/package','PackageController@index')->name('package.packagelist');
@@ -155,5 +157,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::get('/payment/delete/{id}','PaymentController@delete')->name('payment.paymentdelete')->where('id', '[0-9]+'); 
         Route::post('/payment/deleteAll','PaymentController@deleteAll')->name('payment.deleteall'); 
 
+        /* Social route */
+        Route::get('/social','SocialController@index')->name('social.addsocial');
+        Route::post('/social/add','SocialController@addSocialSubmit')->name('social.addsocialsubmit'); 
+       
     });
 });

@@ -80,7 +80,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
+                <a href="{{ route('admin.news.addcomment') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{ __('Comment') }}</p>
                 </a>
@@ -158,7 +158,7 @@
         
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.payment.paymentlist') }}" class="nav-link {{ Request::is('admin/payment*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-usd"></i>
               <p>
                 {{ __('Payment') }}
@@ -176,7 +176,7 @@
         
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.social.addsocialsubmit') }}" class="nav-link {{ Request::is('admin/social*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                {{ __('Social Media') }}

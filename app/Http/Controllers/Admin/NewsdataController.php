@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Requests\AddNewsRequest;
 use App\Http\Requests\EditNewsRequest;
 use App\Http\Controllers\Controller;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 Use App\Category;
 Use App\News;
 use Image;
-
+Use App\Social;
 class NewsdataController extends Controller
 {
     public function index()
@@ -116,5 +117,26 @@ class NewsdataController extends Controller
             News::whereIn('id', $data['newsid'])->delete();
             return redirect("admin/news")->with('succmessage', 'Selected Records Delete Successfully.');   
 		}
+    }
+
+    public function Comment()
+    {
+        $field = Social::where('setting_status',1)->where('setting_type',2)->select('setting_name','setting_value')->get();
+      
+        return view('admin.news.addcomment',compact('field'));
+    }
+    public function addCommentSubmit(Request $request)
+    {
+        
+        if($request->isMethod('Post')){
+            $data = $request->all();
+         
+            foreach($data['v_data'] as $key=>$val){
+                Social::where('setting_name',$key)->update(array('setting_value'=>$val));
+            }
+       
+            return redirect("admin/news/comment")->with('succmessage', 'You have Updated Record Successfully.');   
+        }
+     
     }
 }

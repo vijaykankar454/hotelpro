@@ -19,7 +19,7 @@ class PaymentController extends Controller
     }
    
     public function delete($id){
-        $PagesData= User::findOrFail($id)->delete();
+        $PagesData= Payment::findOrFail($id)->delete();
         return redirect("admin/payment")->with('succmessage', 'Record Deleted Successfully.');   
     }
   
